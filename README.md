@@ -1,10 +1,10 @@
 Welcome
 =======
 This is a for of [Extreme Startup project](https://github.com/rchatley/extreme_startup), by @Robert Chatley, modified to be used in a Code Challengue in my company. The main differences are:
-# The addition of 3 new question types
-# The hability to keep the score for each team even if they withdraw
-# A corrected bug in the Fibonacci question type
-# In each level, the main question types are the latest 4, but there is a small chance (30%) to consider also the older ones
+1. The addition of 3 new question types
+1. The hability to keep the score for each team even if they withdraw
+1. A corrected bug in the Fibonacci question type
+1. In each level, the main question types are the latest 4, but there is a small chance (30%) to consider also the older ones
 
 Getting started
 ---------------
