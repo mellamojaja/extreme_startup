@@ -1,0 +1,26 @@
+---
+-
+  question: "select which of these words is not a spanish verb: caminar papel reir"
+  answer: papel
+-
+  question: "select which of these words is not a spanish verb: beber jugar andar sobre"
+  answer: sobre
+-
+  question: "select which of these words is not a spanish verb: pistacho encender salir"
+  answer: pistacho
+-
+  question: "select which of these words is not a spanish verb: hablar toser nada"
+  answer: nada
+-
+  question: "select which of these words is not a spanish verb: interesante mirar freir"
+  answer: interesante
+-
+  question: "select which of these words is not a spanish verb: escribir corregir dirigir nueve"
+  answer: nueve
+-
+  question: "select which of these words is not a spanish verb: atender cereza ispeccionar cerrar"
+  answer: cereza
+-
+  question: "select which of these words is not a spanish verb: bug resetear codificar depurar"
+  answer: bug
+

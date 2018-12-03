@@ -1,0 +1,25 @@
+---
+-
+  question: "select which of these words is a spanish verb: teclado andar taza"
+  answer: andar
+-
+  question: "select which of these words is a spanish verb: monitor mesa teclado comer"
+  answer: comer
+-
+  question: "select which of these words is a spanish verb: saltar saltito amplitud"
+  answer: saltar
+-
+  question: "select which of these words is a spanish verb: javi luis programar ivan"
+  answer: programar
+-
+  question: "select which of these words is a spanish verb: reir ordenador monitor teclado"
+  answer: reir
+-
+  question: "select which of these words is a spanish verb: cable pantalla fichero tocar"
+  answer: tocar
+-
+  question: "select which of these words is a spanish verb: iman pegar  pizarra"
+  answer: pegar
+-
+  question: "select which of these words is a spanish verb: abrir blackberry telefono television"
+  answer: abrir

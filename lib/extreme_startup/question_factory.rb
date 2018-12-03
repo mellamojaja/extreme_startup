@@ -29,6 +29,9 @@ module ExtremeStartup
 
     def get(url)
       HTTParty.get(url)
+	  # JAJA: Use this to wait for the client up to 30 seconds. 
+	  # It is usefull to manually answer the questions in the client
+	  #HTTParty.get(url, timeout: 30) 
     end
 
     def result
@@ -91,7 +94,7 @@ module ExtremeStartup
       if numbers.any?
         @n1, @n2 = *numbers
       else
-        @n1, @n2 = rand(20), rand(20)
+        @n1, @n2 = rand(1..10), rand(1..10)
       end
     end
   end
@@ -101,7 +104,7 @@ module ExtremeStartup
       if numbers.any?
         @n1, @n2, @n3 = *numbers
       else
-        @n1, @n2, @n3 = rand(20), rand(20), rand(20)
+        @n1, @n2, @n3 = rand(1..10), rand(1..10), rand(1..10)
       end
     end
   end
@@ -135,9 +138,7 @@ module ExtremeStartup
     def as_text
       "which of the following numbers is the largest: " + @numbers.join(', ')
     end
-    def points
-      40
-    end
+
     private
       def should_be_selected(x)
         x == @numbers.max
@@ -155,6 +156,47 @@ module ExtremeStartup
   private
     def correct_answer
       @n1 + @n2
+    end
+  end
+
+  class AdditionQuestionWithWords < BinaryMathsQuestion
+	def as_text
+
+		"what is #{number_to_name(@n1)} plus #{number_to_name(@n2)}"
+    end
+
+	def points
+      20
+    end
+  private
+	def number_to_name(x)
+		names = {
+			  20 => "twenty",
+			  19 => "nineteen",
+			  18 => "eighteen",
+			  17 => "seventeen",
+			  16 => "sixteen",
+			  15 => "fifteen",
+			  14 => "fourteen",
+			  13 => "thirteen",
+			  12 => "twelve",
+			  11 => "eleven",
+			  10 => "ten",
+			  9 => "nine",
+			  8 => "eight",
+			  7 => "seven",
+			  6 => "six",
+			  5 => "five",
+			  4 => "four",
+			  3 => "three",
+			  2 => "two",
+			  1 => "one"
+		}
+		names[x]
+	end
+
+    def correct_answer
+      number_to_name(@n1 + @n2)
     end
   end
 
@@ -183,7 +225,7 @@ module ExtremeStartup
       "what is #{@n1} plus #{@n2} plus #{@n3}"
     end
     def points
-      30
+      20
     end
   private
     def correct_answer
@@ -196,7 +238,7 @@ module ExtremeStartup
       "what is #{@n1} plus #{@n2} multiplied by #{@n3}"
     end
     def points
-      60
+      20
     end
   private
     def correct_answer
@@ -209,7 +251,7 @@ module ExtremeStartup
       "what is #{@n1} multiplied by #{@n2} plus #{@n3}"
     end
     def points
-      50
+      20
     end
   private
     def correct_answer
@@ -221,9 +263,7 @@ module ExtremeStartup
     def as_text
       "what is #{@n1} to the power of #{@n2}"
     end
-    def points
-      20
-    end
+
   private
     def correct_answer
       @n1 ** @n2
@@ -232,10 +272,10 @@ module ExtremeStartup
 
   class SquareCubeQuestion < SelectFromListOfNumbersQuestion
     def as_text
-      "which of the following numbers is both a square and a cube: " + @numbers.join(', ')
+      "which of the following numbers is both a square and a cube (maybe more than one): " + @numbers.join(', ')
     end
     def points
-      60
+      40
     end
   private
     def should_be_selected(x)
@@ -265,10 +305,10 @@ module ExtremeStartup
 
   class PrimesQuestion < SelectFromListOfNumbersQuestion
      def as_text
-       "which of the following numbers are primes: " + @numbers.join(', ')
+       "which of the following numbers are primes (maybe more than one): " + @numbers.join(', ')
      end
      def points
-       60
+       40
      end
    private
      def should_be_selected(x)
@@ -302,11 +342,11 @@ module ExtremeStartup
       return "what is the #{ordinalize(n)} number in the Fibonacci sequence"
     end
     def points
-      50
+      20
     end
   private
     def correct_answer
-      n = @n1 + 4
+      n = @n1 + 3
       a, b = 0, 1
       n.times { a, b = b, a + b }
       a
@@ -329,6 +369,48 @@ module ExtremeStartup
     def correct_answer
       @correct_answer
     end
+
+	def points
+      20
+    end
+  end
+
+  class SpanishVerbsQuestion < Question
+    @@quiz_cards = YAML.load_file(File.join(File.dirname(__FILE__), "spanish-verbs.yaml"))
+
+    def initialize(player)
+      quiz_card = @@quiz_cards.sample
+      @question = quiz_card["question"]
+      @correct_answer = quiz_card["answer"]
+    end
+
+    def as_text
+      @question
+    end
+
+    def correct_answer
+      @correct_answer
+    end
+
+  end
+
+  class SpanishNotVerbsQuestion < Question
+    @@quiz_cards = YAML.load_file(File.join(File.dirname(__FILE__), "spanish-not-verbs.yaml"))
+
+    def initialize(player)
+      quiz_card = @@quiz_cards.sample
+      @question = quiz_card["question"]
+      @correct_answer = quiz_card["answer"]
+    end
+
+    def as_text
+      @question
+    end
+
+    def correct_answer
+      @correct_answer
+    end
+
   end
 
   require 'yaml'
@@ -351,6 +433,10 @@ module ExtremeStartup
     def correct_answer
       @anagram["correct"]
     end
+
+	def points
+      40
+    end
   end
 
   class ScrabbleQuestion < Question
@@ -370,6 +456,10 @@ module ExtremeStartup
       @word.chars.inject(0) do |score, letter|
         score += scrabble_scores[letter.downcase]
       end
+    end
+
+	def points
+      40
     end
 
     private
@@ -395,30 +485,39 @@ module ExtremeStartup
       @question_types = [
         AdditionQuestion,
         MaximumQuestion,
-        MultiplicationQuestion,
-        SquareCubeQuestion,
-        GeneralKnowledgeQuestion,
-        PrimesQuestion,
-        SubtractionQuestion,
-        FibonacciQuestion,
-        PowerQuestion,
-        AdditionAdditionQuestion,
-        AdditionMultiplicationQuestion,
-        MultiplicationAdditionQuestion,
-        AnagramQuestion,
+		MultiplicationQuestion,
+		SpanishVerbsQuestion,
+		PowerQuestion,
+		FibonacciQuestion,
+		SquareCubeQuestion,
+		SpanishNotVerbsQuestion,
+		#--SubtractionQuestion,
+		AdditionQuestionWithWords,
+		GeneralKnowledgeQuestion,
+		AdditionAdditionQuestion,
+		PrimesQuestion,
+		AnagramQuestion,
+        #--AdditionMultiplicationQuestion,
+        #--MultiplicationAdditionQuestion,
         ScrabbleQuestion
       ]
     end
 
     def next_question(player)
       window_end = (@round * 2 - 1)
-      window_start = [0, window_end - 4].max
+      window_start = rand(1.0) < 0.3 ? 0 : [0, window_end - 4].max
+	  
+	  # Use the next lines to use only 1 question type each level
+	  # It is useful to debug in the client each type of question
+	  #window_end = @round - 1
+	  #window_start = @round - 1
       available_question_types = @question_types[window_start..window_end]
       available_question_types.sample.new(player)
     end
 
     def advance_round
-      @round += 1
+      @round =  ((@round + 1) * 2) <= @question_types.length ? @round + 1 : @round
+	  #@round += 1
     end
 
   end

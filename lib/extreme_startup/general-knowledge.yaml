@@ -1,13 +1,19 @@
 ---
 -
-  question: which year was Theresa May first elected as the Prime Minister of Great Britain
-  answer: 2016
+  question: "who was the Jedi that ordered the creation of the Clone Army?"
+  answer: Sifo Dyas
 -
-  question: which city is the Eiffel tower in
-  answer: Paris
+  question: "what is the home planet of the wookiees?"
+  answer: Kashyyyk
 -
-  question: what colour is a banana
-  answer: yellow
+  question: "whose DNA were the Republic clones made from?"
+  answer: Jango Fett
 -
-  question: who played James Bond in the film Dr No
-  answer: Sean Connery
+  question: "how many members had the Jedi Council?"
+  answer: 12
+-
+  question: "how many meters was the exhaust port of the Death Star that was its only weakness?"
+  answer: 2
+-
+  question: "who was the main designer of the Death Star that also introduced a vulnerability in it?"
+  answer: Galen Erso

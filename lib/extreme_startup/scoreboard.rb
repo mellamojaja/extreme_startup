@@ -5,6 +5,7 @@ module ExtremeStartup
     def initialize(lenient)
       @lenient = lenient
       @scores = Hash.new { 0 }
+	  @old_scores = Hash.new { 0 }
       @correct_tally = Hash.new { 0 }
       @incorrect_tally = Hash.new { 0 }
       @request_counts = Hash.new { 0 }
@@ -18,7 +19,7 @@ module ExtremeStartup
       elsif (increment < 0)
         @incorrect_tally[player.uuid] += 1
       end
-      puts "added #{increment} to player #{player.name}'s score. It is now #{@scores[player.uuid]}"
+      puts "added #{increment} to player #{player.uuid} - #{player.name} score. It is now #{@scores[player.uuid]}"
       player.log_result(question.id, question.result, increment)
     end
     
@@ -27,11 +28,12 @@ module ExtremeStartup
     end
   
     def new_player(player)
-      @scores[player.uuid] = 0
+		@scores[player.uuid] = @old_scores[player.name] || 0
     end
     
     def delete_player(player)
-      @scores.delete(player.uuid)
+		@old_scores[player.name] = @scores[player.uuid]
+		@scores.delete(player.uuid)
     end
     
     def current_score(player)

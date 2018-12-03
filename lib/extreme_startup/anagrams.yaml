@@ -28,3 +28,36 @@
   - random
   - border
   - forgot
+-
+  anagram: altisonancia
+  correct: nacionalista
+  incorrect:
+  - cardiografia
+  - certificable
+  - aguardentosa
+  - aparcamiento
+-
+  anagram: rectificador
+  correct: certificador
+  incorrect:
+  - desamparador
+  - ironicamente
+  - materialismo
+  - conservacion
+-
+  anagram: saqueamiento
+  correct: asqueamiento
+  incorrect:
+  - desmentidora
+  - enfriamiento
+  - imperdonable
+  - altisonancia
+-
+  anagram: imperdonable
+  correct: imponderable
+  incorrect:
+  - ironicamente
+  - renacimiento
+  - conversacion
+  - transigencia
+ 
